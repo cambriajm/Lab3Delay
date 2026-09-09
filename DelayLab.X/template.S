@@ -38,11 +38,36 @@ PSECT code,class=CODE,delta=2 //after PSECT everything is grouped until the next
 
 Setup:
     ; add device setup here 
+    BCF 0x03,6 ;set bank 0 active
+    BCF 0x03,5;set bank 0
+    CLRF 0x17 ;ccpcon bank 0 turn off
+    
+    BCF 0x03,6
+    BSF 0x03,5 ;set bank 1 active 
+    BSF 0x06,7 ; tristb sets all part B as outputs 
+    CLRF 0x95
+    CLRF 0x86
+    CLRF 0x96
+    
+    BSF 0x03,6
+    BCF 0x03,5 ;set bank 2
+    BSF 0x09,1 ;turn TTG function off
+    
+    BSF 0x03,6 
+    BSF 0x03,5 ;set bank 3 
+    CLRF 0x89 ;anselh turn off
+    BSF 0x81,7
+    CLRF 0x8B
+   
+    BCF 0x03,6 ;set bank 0 active
+    BCF 0x03,5 ;set bank 0
+;    
     goto Main
- 
-psect Code 
  
  Main: 
     //main code goes here. Repeats forever because setup goes once 
+    NOP
+    INCF 0x06,1 ;plus 1 to port B forever 
+    
     goto Main 
  End
