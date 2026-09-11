@@ -77,22 +77,17 @@ Main:
     //main code goes here. Repeats forever because setup goes once 
     MOVLW 0x05 
     XORWF 0x07,1
-    
-    MOVLW 0x04
+    MOVLW 0x05
     MOVWF OutCount
-    GOTO OuterDelay
     
-OuterDelay:
-    MOVLW 0xC0
+OuterDelay: 
+    MOVLW 0x64
     MOVWF MidCount
-    GOTO MidDelay
-    
 MidDelay:
-    MOVLW 0xD7
+    MOVLW 0xF9
     MOVWF InCount
-    GOTO InDelay
-    
 InDelay:
+    NOP
     DECFSZ InCount
     GOTO InDelay
     
@@ -101,24 +96,7 @@ InDelay:
     
     DECFSZ OutCount
     GOTO OuterDelay
-    NOP
+    
     GOTO Main
-    
-    
-    ;1 TCY code not part of delay
-   // XORWF PORTC,1                   ;1 TCY code not part of delay
-
-   
-    //MOVLW 0x0F                      ;1 TCY delay overhead
-    //MOVWF count                     ;1 TCY delay overhead
-    
-    //DelayLoop:                     
-    //DECFSZ count,1                  ;1(2) 1 TCY if not zero, 2 TCY if zero
-    //GOTO DelayLoop                  ;2 TCY
-    
-    //DelayMini:
-    
-
-    //GOTO   Main              ;2 TCY code not part of delay
     
  End

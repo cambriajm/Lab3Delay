@@ -2362,9 +2362,9 @@ Setup:
 
     BCF 0x03,6 ;set bank 1 active
     BSF 0x03,5 ;set bank 1 active
-    MOVLW 0xFF
-    MOVWF 0x86 ;sets as output trisb
-    CLRF 0x95
+
+    CLRF 0x86 ;sets as output trisb
+
     CLRF 0x87 ;sets as output trisc
 
     BSF 0x03,6 ;set bank 2 active
@@ -2391,28 +2391,25 @@ Setup:
 Main:
 
     MOVLW 0x05
-    XORWF 0x07,F
+    XORWF 0x07,1
 
     MOVLW 0x04
     MOVWF OutCount
     GOTO OuterDelay
 
 OuterDelay:
-    MOVLW 0xC0
+    MOVLW 0x19
     MOVWF MidCount
     GOTO MidDelay
 
 MidDelay:
-    MOVLW 0xD7
+    MOVLW 0xF9
     MOVWF InCount
     GOTO InDelay
 
 InDelay:
     DECFSZ InCount
     GOTO InDelay
-
-    DECFSZ MidCount
-    GOTO MidCount
 
     DECFSZ MidCount
     GOTO MidDelay
@@ -2424,5 +2421,5 @@ InDelay:
 
 
     ;1 TCY code not part of delay
-# 127 "../../DelayLab3/template.S"
+# 124 "../../DelayLab3/template.S"
  End

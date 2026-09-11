@@ -2392,22 +2392,17 @@ Main:
 
     MOVLW 0x05
     XORWF 0x07,1
-
-    MOVLW 0x04
+    MOVLW 0x05
     MOVWF OutCount
-    GOTO OuterDelay
 
 OuterDelay:
-    MOVLW 0xC0
+    MOVLW 0x64
     MOVWF MidCount
-    GOTO MidDelay
-
 MidDelay:
-    MOVLW 0xD7
+    MOVLW 0xF9
     MOVWF InCount
-    GOTO InDelay
-
 InDelay:
+    NOP
     DECFSZ InCount
     GOTO InDelay
 
@@ -2416,10 +2411,7 @@ InDelay:
 
     DECFSZ OutCount
     GOTO OuterDelay
-    NOP
+
     GOTO Main
 
-
-    ;1 TCY code not part of delay
-# 124 "../../DelayLab3/template.S"
  End
